@@ -1,0 +1,34 @@
+JobScam Guard
+
+An AI tool that helps students check job posts and recruiter messages for scam signs. Built for ForgeHacks 2026 (AI + Cybersecurity track).
+
+Problem
+
+Students and job seekers are targeted by fake job and internship offers (fake checks, fees, requests for personal data).
+
+What it does
+Recognize - a text classifier trained on fake job postings gives a scam probability.
+Verify - rule checks look for red flags: payment requests, fake-check schemes, free email addresses, sender/company domain mismatch, moving to private chat apps.
+Explain - plain-language reasons for the risk level.
+Respond - next steps, reporting links, and a safe reply to send.
+Results (baseline model, 20% held-out test set)
+Class	Precision	Recall	F1
+Fake	0.84	0.91	0.87
+
+Confusion matrix: 157 fake caught, 16 missed, 31 real flagged as fake, 3372 real correct.
+
+Limitations
+Trained on an older public dataset; it may not generalize to short modern recruiter texts.
+Some learned terms reflect dataset quirks, not scam behavior.
+Rules can be avoided by a careful scammer. This tool is a helper, not a guarantee.
+Tech
+
+Python, scikit-learn (TF-IDF + Logistic Regression), rule-based checks, Streamlit. Optional LLM explanation via any OpenAI-compatible API.
+
+Run it
+pip install -r requirements.txt
+streamlit run app.py
+Files
+train_baseline.py - trains the model
+checks.py - rule-based verification
+app.py - Streamlit app
